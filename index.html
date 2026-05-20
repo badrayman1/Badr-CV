@@ -39,38 +39,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideInLeft {
-            from { opacity: 0; transform: translateX(-40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
-        @keyframes slideInRight {
-            from { opacity: 0; transform: translateX(40px); }
-            to { opacity: 1; transform: translateX(0); }
-        }
-
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-20px); }
-        }
-
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(227, 6, 19, 0.2); }
-            50% { box-shadow: 0 0 40px rgba(227, 6, 19, 0.4); }
-        }
-
-        @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
-        }
-
-        @keyframes blink {
-            50% { border-color: transparent; }
         }
 
         @keyframes gradientShift {
@@ -79,33 +50,11 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes orbitSlow {
-            from { transform: rotate(0deg) translateX(200px) rotate(0deg); }
-            to { transform: rotate(360deg) translateX(200px) rotate(-360deg); }
-        }
-
         .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
 
         .fade-in { opacity: 0; transition: opacity 0.8s ease; }
         .fade-in.visible { opacity: 1; }
-
-        .slide-left { opacity: 0; transform: translateX(-40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .slide-left.visible { opacity: 1; transform: translateX(0); }
-
-        .slide-right { opacity: 0; transform: translateX(40px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .slide-right.visible { opacity: 1; transform: translateX(0); }
-
-        .typing-text {
-            display: inline-block;
-            overflow: hidden;
-            white-space: nowrap;
-            border-right: 3px solid #E30613;
-            animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite;
-            width: 0;
-        }
-
-        .typing-text.active { animation: typing 3s steps(40, end) forwards, blink 0.75s step-end infinite; }
 
         .skill-bar-fill {
             height: 100%;
@@ -114,17 +63,7 @@
             width: 0;
             transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-
         .skill-bar-fill.visible { width: var(--fill-width); }
-
-        .timeline-line {
-            position: absolute;
-            left: 20px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(to bottom, #E30613, rgba(227, 6, 19, 0.1));
-        }
 
         .timeline-dot {
             position: absolute;
@@ -137,10 +76,7 @@
             z-index: 2;
         }
 
-        .nav-link {
-            position: relative;
-            transition: color 0.3s ease;
-        }
+        .nav-link { position: relative; transition: color 0.3s ease; }
         .nav-link::after {
             content: '';
             position: absolute;
@@ -151,52 +87,19 @@
             background: #E30613;
             transition: width 0.3s ease;
         }
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: #E30613;
-        }
-
-        .project-card-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.3), transparent);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        .project-card:hover .project-card-overlay {
-            opacity: 1;
-        }
-        .project-card:hover .project-card-info {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        .project-card-info {
-            transform: translateY(20px);
-            opacity: 0;
-            transition: all 0.4s ease 0.1s;
-        }
-
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+        .nav-link:hover, .nav-link.active { color: #E30613; }
         .cursor-dot {
-            width: 8px;
-            height: 8px;
-            background: #E30613;
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
+            width: 8px; height: 8px;
+            background: #E30613; border-radius: 50%;
+            position: fixed; pointer-events: none; z-index: 9999;
             transition: transform 0.1s ease;
         }
         .cursor-ring {
-            width: 35px;
-            height: 35px;
+            width: 35px; height: 35px;
             border: 2px solid rgba(227, 6, 19, 0.5);
             border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9998;
+            position: fixed; pointer-events: none; z-index: 9998;
             transition: all 0.15s ease;
         }
 
@@ -209,25 +112,19 @@
             animation: gradientShift 3s ease infinite;
         }
 
-        .section-heading {
-            position: relative;
-            display: inline-block;
-        }
+        .section-heading { position: relative; display: inline-block; }
         .section-heading::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60px;
-            height: 3px;
+            bottom: -8px; left: 0;
+            width: 60px; height: 3px;
             background: #E30613;
             border-radius: 2px;
         }
 
         .hero-particle {
             position: absolute;
-            width: 4px;
-            height: 4px;
+            width: 4px; height: 4px;
             background: rgba(227, 6, 19, 0.3);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
@@ -237,9 +134,7 @@
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .mobile-menu.open {
-            transform: translateX(0);
-        }
+        .mobile-menu.open { transform: translateX(0); }
 
         .cert-badge {
             background: rgba(227, 6, 19, 0.1);
@@ -253,16 +148,87 @@
         }
 
         .scroll-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 3px;
+            position: fixed; top: 0; left: 0; height: 3px;
             background: linear-gradient(to right, #E30613, #f87171);
             z-index: 10000;
             transition: width 0.1s linear;
         }
 
-        @media (max-width: 768px) {
+        /* ===== Hero Background Fix ===== */
+        .hero-bg-wrapper {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) saturate(0.8);
+        }
+
+        /* ديسكتوب - الصورة العمودية بتتحط يمين */
+        @media (min-width: 768px) {
+            .hero-bg-wrapper img {
+                object-position: center 20%;
+            }
+        }
+
+        /* موبايل - الصورة بتملأ الشاشة */
+        @media (max-width: 767px) {
+            .hero-bg-wrapper img {
+                object-position: center top;
+            }
+        }
+
+        .hero-gradient-overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-gradient-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #050505 0%, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.4) 70%, rgba(5,5,5,0.3) 100%);
+        }
+
+        .hero-gradient-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.5) 30%, transparent 60%);
+        }
+
+        @media (max-width: 767px) {
+            .hero-gradient-overlay::before {
+                background: linear-gradient(to right, rgba(5,5,5,0.9) 0%, rgba(5,5,5,0.7) 50%, rgba(5,5,5,0.6) 100%);
+            }
+        }
+
+        /* About Image */
+        .about-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.7s ease, opacity 0.5s ease;
+            opacity: 0.85;
+        }
+
+        .about-img-wrapper:hover img {
+            transform: scale(1.05);
+            opacity: 0.95;
+        }
+
+        @media (max-width: 767px) {
             .cursor-dot, .cursor-ring { display: none; }
         }
     </style>
@@ -289,7 +255,6 @@
                 <a href="#about" class="nav-link text-sm tracking-wide uppercase font-medium text-gray-400">About</a>
                 <a href="#experience" class="nav-link text-sm tracking-wide uppercase font-medium text-gray-400">Experience</a>
                 <a href="#skills" class="nav-link text-sm tracking-wide uppercase font-medium text-gray-400">Skills</a>
-                <a href="#projects" class="nav-link text-sm tracking-wide uppercase font-medium text-gray-400">Projects</a>
                 <a href="#contact" class="nav-link text-sm tracking-wide uppercase font-medium text-gray-400">Contact</a>
             </div>
             <div class="hidden md:flex items-center gap-4">
@@ -300,7 +265,6 @@
                     <iconify-icon icon="mdi:linkedin" width="22"></iconify-icon>
                 </a>
             </div>
-            <!-- Mobile Menu Button -->
             <button id="menuBtn" class="md:hidden text-white p-2" onclick="toggleMenu()">
                 <iconify-icon icon="mdi:menu" width="28" id="menuIcon"></iconify-icon>
             </button>
@@ -313,7 +277,6 @@
         <a href="#about" class="text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">About</a>
         <a href="#experience" class="text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Experience</a>
         <a href="#skills" class="text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Skills</a>
-        <a href="#projects" class="text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Projects</a>
         <a href="#contact" class="text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Contact</a>
         <div class="flex gap-6 mt-4">
             <a href="https://github.com/badrayman1" target="_blank" class="text-gray-400 hover:text-[#E30613] transition-colors">
@@ -325,14 +288,33 @@
         </div>
     </div>
 
-    <!-- Hero Section -->
+    <!-- ===== HERO SECTION ===== -->
     <section id="hero" class="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden">
         <!-- Background -->
-        <div class="absolute inset-0">
-            <img src="https://picsum.photos/seed/badr-hero-dark/1920/1080.jpg" alt="Hero Background" class="w-full h-full object-cover object-center opacity-30">
-            <div class="absolute inset-0 bg-gradient-to-r from-[#050505] via-[#050505]/80 to-transparent"></div>
-            <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+        <div class="hero-bg-wrapper">
+            <!-- 
+                صورة الهيرو - هنا بنستخدم صورتك العمودية
+                object-fit: cover = بتملأ الشاشة كاملة
+                object-position: center 20% = بيركز على الجزء العلوي (الوجه) في الصورة العمودية
+            -->
+            <picture>
+                <!-- لو عندك صورة عرضية للديسكتوب حطها هنا -->
+                <!-- <source media="(min-width: 768px)" srcset="your-desktop-image.jpg"> -->
+                
+                <!-- الصورة الافتراضية (صورة Instagram العمودية) -->
+                <img 
+                    src="1740475412697.jfif" 
+                    alt="Badr Ayman"
+                    loading="eager"
+                >
+            </picture>
         </div>
+
+        <!-- Gradient Overlays -->
+        <div class="hero-gradient-overlay"></div>
+
+        <!-- Red accent glow -->
+        <div class="absolute top-1/4 right-1/4 w-96 h-96 bg-[#E30613]/5 rounded-full blur-3xl pointer-events-none"></div>
 
         <!-- Particles -->
         <div class="hero-particle" style="top: 20%; left: 15%; animation-delay: 0s; animation-duration: 5s;"></div>
@@ -354,7 +336,7 @@
                 </h1>
                 <div class="flex items-center gap-3 mb-6" style="animation: fadeUp 0.8s ease forwards; animation-delay: 0.6s; opacity: 0;">
                     <div class="w-2 h-2 rounded-full bg-[#E30613] animate-pulse"></div>
-                    <p class="text-gray-400 text-lg md:text-xl tracking-wide" id="typewriterContainer">
+                    <p class="text-gray-400 text-lg md:text-xl tracking-wide">
                         <span id="typewriter"></span><span class="text-[#E30613]">|</span>
                     </p>
                 </div>
@@ -402,8 +384,16 @@
             <div class="grid md:grid-cols-2 gap-16 items-center">
                 <!-- Image -->
                 <div class="fade-up relative">
-                    <div class="relative rounded-lg overflow-hidden">
-                        <img src="https://picsum.photos/seed/badr-portrait-dev/600/750.jpg" alt="Badr Ayman" class="w-full h-[500px] md:h-[600px] object-cover opacity-80">
+                    <div class="about-img-wrapper h-[500px] md:h-[600px]">
+                        <!-- 
+                            صورة الـ About - نفس صورتك العمودية هنا
+                            object-position: center top = يركز على الوجه
+                        -->
+                        <img 
+                            src="Screenshot_2025-12-25-21-00-23-669_com.instagram.android-edit.jpg" 
+                            alt="Badr Ayman"
+                            loading="lazy"
+                        >
                         <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
                     </div>
                     <!-- Decorative frame -->
@@ -436,7 +426,6 @@
                         Eager to contribute to innovative projects and continuously improve technical skills. I thrive in collaborative environments and enjoy mentoring junior developers to reach their full potential.
                     </p>
 
-                    <!-- Info Grid -->
                     <div class="fade-up grid grid-cols-2 gap-4 mb-8">
                         <div class="flex items-center gap-3">
                             <iconify-icon icon="mdi:map-marker" width="20" class="text-[#E30613]"></iconify-icon>
@@ -452,7 +441,7 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <iconify-icon icon="mdi:school-outline" width="20" class="text-[#E30613]"></iconify-icon>
-                            <span class="text-gray-300 text-sm">Borg El Arab University</span>
+                            <span class="text-gray-300 text-sm">Borg El Arab Uni</span>
                         </div>
                     </div>
 
@@ -480,11 +469,13 @@
             </div>
 
             <div class="max-w-4xl mx-auto relative">
-                <!-- Timeline -->
+                <!-- Timeline Line -->
+                <div class="absolute left-5 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#E30613] via-[#E30613]/50 to-transparent hidden md:block"></div>
+
                 <div class="space-y-12">
                     <!-- Experience 1 -->
-                    <div class="fade-up relative pl-14">
-                        <div class="timeline-dot" style="top: 8px;"></div>
+                    <div class="fade-up relative pl-0 md:pl-14">
+                        <div class="timeline-dot hidden md:block" style="top: 32px;"></div>
                         <div class="glass-panel-hover rounded-lg p-8">
                             <div class="flex flex-wrap items-center gap-3 mb-4">
                                 <span class="bg-[#E30613]/10 text-[#E30613] px-3 py-1 rounded-full text-xs tracking-widest uppercase font-medium">Frontend</span>
@@ -514,8 +505,8 @@
                     </div>
 
                     <!-- Experience 2 -->
-                    <div class="fade-up relative pl-14">
-                        <div class="timeline-dot" style="top: 8px;"></div>
+                    <div class="fade-up relative pl-0 md:pl-14">
+                        <div class="timeline-dot hidden md:block" style="top: 32px;"></div>
                         <div class="glass-panel-hover rounded-lg p-8">
                             <div class="flex flex-wrap items-center gap-3 mb-4">
                                 <span class="bg-[#E30613]/10 text-[#E30613] px-3 py-1 rounded-full text-xs tracking-widest uppercase font-medium">Backend</span>
@@ -604,7 +595,6 @@
 
     <!-- Skills Section -->
     <section id="skills" class="py-24 relative overflow-hidden">
-        <!-- Background decoration -->
         <div class="absolute top-0 right-0 w-96 h-96 bg-[#E30613]/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-96 h-96 bg-[#E30613]/5 rounded-full blur-3xl"></div>
 
@@ -620,9 +610,7 @@
                 </h2>
             </div>
 
-            <!-- Skill Categories -->
             <div class="grid md:grid-cols-3 gap-8 mb-16">
-                <!-- Frontend -->
                 <div class="fade-up glass-panel-hover rounded-lg p-8 text-center">
                     <div class="w-16 h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-6">
                         <iconify-icon icon="mdi:monitor-dashboard" width="32" class="text-[#E30613]"></iconify-icon>
@@ -637,7 +625,6 @@
                     </div>
                 </div>
 
-                <!-- Backend -->
                 <div class="fade-up glass-panel-hover rounded-lg p-8 text-center">
                     <div class="w-16 h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-6">
                         <iconify-icon icon="mdi:server" width="32" class="text-[#E30613]"></iconify-icon>
@@ -652,7 +639,6 @@
                     </div>
                 </div>
 
-                <!-- Database & Tools -->
                 <div class="fade-up glass-panel-hover rounded-lg p-8 text-center">
                     <div class="w-16 h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-6">
                         <iconify-icon icon="mdi:database" width="32" class="text-[#E30613]"></iconify-icon>
@@ -668,7 +654,6 @@
                 </div>
             </div>
 
-            <!-- Skill Bars -->
             <div class="max-w-3xl mx-auto space-y-6">
                 <div class="fade-up">
                     <div class="flex justify-between mb-2">
@@ -727,76 +712,6 @@
             </div>
         </div>
     </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-24 relative">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <p class="fade-up text-[#E30613] text-sm tracking-[0.3em] uppercase font-medium mb-3">
-                    <span class="inline-block w-8 h-[2px] bg-[#E30613] mr-3 align-middle"></span>
-                    Portfolio
-                    <span class="inline-block w-8 h-[2px] bg-[#E30613] ml-3 align-middle"></span>
-                </p>
-                <h2 class="fade-up font-['Oswald'] text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                    Featured <span class="gradient-text">Projects</span>
-                </h2>
-            </div>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Project 1 -->
-                <div class="fade-up project-card relative rounded-lg overflow-hidden group cursor-pointer h-[450px]">
-                    <img src="https://picsum.photos/seed/elderly-healthcare/600/450.jpg" alt="Elderly Wearable System" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
-                    <div class="project-card-overlay"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end">
-                        <div class="project-card-info">
-                            <span class="bg-[#E30613]/10 text-[#E30613] px-3 py-1 rounded-full text-xs tracking-widest uppercase font-medium inline-block mb-3">Healthcare</span>
-                            <h3 class="font-['Oswald'] text-2xl tracking-wide mb-2">Elderly Wearable System</h3>
-                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Smart healthcare monitoring system using Firebase and React for real-time elderly health tracking.</p>
-                            <div class="flex gap-2">
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">React</span>
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">Firebase</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="fade-up project-card relative rounded-lg overflow-hidden group cursor-pointer h-[450px]">
-                    <img src="https://picsum.photos/seed/competition-platform/600/450.jpg" alt="Competition Management" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
-                    <div class="project-card-overlay"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end">
-                        <div class="project-card-info">
-                            <span class="bg-[#E30613]/10 text-[#E30613] px-3 py-1 rounded-full text-xs tracking-widest uppercase font-medium inline-block mb-3">Platform</span>
-                            <h3 class="font-['Oswald'] text-2xl tracking-wide mb-2">Competition Management</h3>
-                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Full-stack platform for managing competitions using PHP and MySQL with comprehensive admin dashboard.</p>
-                            <div class="flex gap-2">
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">PHP</span>
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">MySQL</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="fade-up project-card relative rounded-lg overflow-hidden group cursor-pointer h-[450px]">
-                    <img src="https://picsum.photos/seed/restaurant-qr-menu/600/450.jpg" alt="Restaurant Menu QR" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-60">
-                    <div class="project-card-overlay"></div>
-                    <div class="absolute inset-0 p-8 flex flex-col justify-end">
-                        <div class="project-card-info">
-                            <span class="bg-[#E30613]/10 text-[#E30613] px-3 py-1 rounded-full text-xs tracking-widest uppercase font-medium inline-block mb-3">Web App</span>
-                            <h3 class="font-['Oswald'] text-2xl tracking-wide mb-2">Restaurant Menu QR</h3>
-                            <p class="text-gray-400 font-light text-sm leading-relaxed mb-4">Dynamic digital menu system with image upload support, QR code generation, and admin panel.</p>
-                            <div class="flex gap-2">
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">Full-Stack</span>
-                                <span class="bg-white/10 text-gray-300 px-2.5 py-1 rounded-full text-xs">Image Upload</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Certifications Section -->
     <section id="certifications" class="py-24 relative">
         <div class="max-w-7xl mx-auto px-6">
@@ -872,7 +787,7 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-24 relative">
-        <div class="absolute inset-0 opacity-5">
+        <div class="absolute inset-0 opacity-5 pointer-events-none">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] border border-[#E30613] rounded-full"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] border border-[#E30613] rounded-full"></div>
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] border border-[#E30613] rounded-full"></div>
@@ -891,7 +806,6 @@
             </div>
 
             <div class="grid md:grid-cols-2 gap-16 max-w-5xl mx-auto">
-                <!-- Contact Info -->
                 <div>
                     <p class="fade-up text-gray-400 font-light leading-relaxed mb-8">
                         I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
@@ -929,7 +843,6 @@
                         </div>
                     </div>
 
-                    <!-- Social Links -->
                     <div class="fade-up flex gap-4 mt-10">
                         <a href="https://github.com/badrayman1" target="_blank" class="w-12 h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300">
                             <iconify-icon icon="mdi:github" width="22"></iconify-icon>
@@ -943,7 +856,6 @@
                     </div>
                 </div>
 
-                <!-- Contact Form -->
                 <div class="fade-up">
                     <form id="contactForm" class="space-y-5">
                         <div>
@@ -981,9 +893,7 @@
                     <div class="w-8 h-8 rounded bg-[#E30613] flex items-center justify-center font-['Oswald'] text-sm font-600">B</div>
                     <span class="font-['Oswald'] text-sm tracking-wide uppercase">Badr Ayman</span>
                 </div>
-                <p class="text-gray-600 text-sm">
-                    © 2025 Badr Ayman. All rights reserved.
-                </p>
+                <p class="text-gray-600 text-sm">© 2025 Badr Ayman. All rights reserved.</p>
                 <div class="flex gap-4">
                     <a href="https://github.com/badrayman1" target="_blank" class="text-gray-600 hover:text-[#E30613] transition-colors">
                         <iconify-icon icon="mdi:github" width="20"></iconify-icon>
@@ -1020,6 +930,8 @@
             el.addEventListener('mouseenter', () => {
                 cursorRing.style.width = '50px';
                 cursorRing.style.height = '50px';
+                cursorRing.style.left = parseFloat(cursorRing.style.left) - 7.5 + 'px';
+                cursorRing.style.top = parseFloat(cursorRing.style.top) - 7.5 + 'px';
                 cursorRing.style.borderColor = 'rgba(227, 6, 19, 0.8)';
             });
             el.addEventListener('mouseleave', () => {
@@ -1044,7 +956,6 @@
             const scrollPercent = (scrollTop / scrollHeight) * 100;
             document.getElementById('scrollProgress').style.width = scrollPercent + '%';
 
-            // Back to Top
             const backToTop = document.getElementById('backToTop');
             if (scrollTop > 500) {
                 backToTop.style.opacity = '1';
@@ -1055,7 +966,7 @@
             }
         });
 
-        // ===== Typewriter Effect =====
+        // ===== Typewriter =====
         const typewriterTexts = [
             'Junior Full-Stack Web Developer',
             'React.js Developer',
@@ -1063,14 +974,11 @@
             'Laravel Developer',
             'Problem Solver'
         ];
-        let textIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        let textIndex = 0, charIndex = 0, isDeleting = false;
         const typewriterEl = document.getElementById('typewriter');
 
         function typeWriter() {
             const currentText = typewriterTexts[textIndex];
-            
             if (isDeleting) {
                 typewriterEl.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
@@ -1078,9 +986,7 @@
                 typewriterEl.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
             }
-
             let timeout = isDeleting ? 30 : 80;
-
             if (!isDeleting && charIndex === currentText.length) {
                 timeout = 2000;
                 isDeleting = true;
@@ -1089,7 +995,6 @@
                 textIndex = (textIndex + 1) % typewriterTexts.length;
                 timeout = 500;
             }
-
             setTimeout(typeWriter, timeout);
         }
         setTimeout(typeWriter, 1500);
@@ -1110,24 +1015,14 @@
 
         let countersAnimated = false;
 
-        // ===== Scroll Animations (Intersection Observer) =====
+        // ===== Scroll Animations =====
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-
-                    // Skill bars
                     entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
                         bar.classList.add('visible');
                     });
-
-                    // Counters
-                    if (!countersAnimated && entry.target.closest('#hero')) {
-                        countersAnimated = true;
-                        animateCounter(document.getElementById('statProjects'), 3);
-                        animateCounter(document.getElementById('statTechnologies'), 12);
-                        animateCounter(document.getElementById('statCertifications'), 6);
-                    }
                 }
             });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
@@ -1136,12 +1031,7 @@
             observer.observe(el);
         });
 
-        // Observe skill bars parent
-        document.querySelectorAll('.skill-bar-fill').forEach(el => {
-            observer.observe(el.closest('.fade-up') || el);
-        });
-
-        // Animate hero counters on load
+        // Hero counters on load
         setTimeout(() => {
             if (!countersAnimated) {
                 countersAnimated = true;
@@ -1159,18 +1049,13 @@
             let current = '';
             sections.forEach(section => {
                 const sectionTop = section.offsetTop - 100;
-                if (scrollY >= sectionTop) {
-                    current = section.getAttribute('id');
-                }
+                if (scrollY >= sectionTop) current = section.getAttribute('id');
             });
-
             navLinks.forEach(link => {
-                link.classList.remove('active');
-                link.classList.remove('text-[#E30613]');
+                link.classList.remove('active', 'text-[#E30613]');
                 link.classList.add('text-gray-400');
                 if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active');
-                    link.classList.add('text-[#E30613]');
+                    link.classList.add('active', 'text-[#E30613]');
                     link.classList.remove('text-gray-400');
                 }
             });
@@ -1184,19 +1069,13 @@
             msgDiv.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
             msgDiv.classList.remove('hidden');
             this.reset();
-            setTimeout(() => {
-                msgDiv.classList.add('hidden');
-            }, 5000);
+            setTimeout(() => { msgDiv.classList.add('hidden'); }, 5000);
         });
 
-        // ===== Navbar background on scroll =====
+        // ===== Navbar on scroll =====
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.style.background = 'rgba(5, 5, 5, 0.9)';
-            } else {
-                navbar.style.background = 'rgba(26, 26, 26, 0.6)';
-            }
+            navbar.style.background = window.scrollY > 50 ? 'rgba(5, 5, 5, 0.95)' : 'rgba(26, 26, 26, 0.6)';
         });
     </script>
 </body>
