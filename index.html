@@ -1,24 +1,49 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Badr Ayman – Full-Stack Developer</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Inter', sans-serif; background: #050505; color: #fff; overflow-x: hidden; }
-        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; }
-        ::selection { background: #E30613; color: #fff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #050505;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Oswald', sans-serif;
+        }
+
+        ::selection {
+            background: #E30613;
+            color: #fff;
+        }
+
+        /* ===== GLASS PANELS ===== */
         .glass-panel {
             background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .glass-panel-hover {
             background: rgba(26, 26, 26, 0.6);
             backdrop-filter: blur(12px);
@@ -26,29 +51,77 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s ease;
         }
+
         .glass-panel-hover:hover {
             border-color: rgba(227, 6, 19, 0.3);
             box-shadow: 0 0 30px rgba(227, 6, 19, 0.1);
             transform: translateY(-4px);
         }
 
+        /* ===== KEYFRAMES ===== */
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
         }
+
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
-        .fade-up { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
+        @keyframes pulse-dot {
 
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SKILL BARS ===== */
         .skill-bar-fill {
             height: 100%;
             background: linear-gradient(to right, #E30613, #f87171);
@@ -56,244 +129,511 @@
             width: 0;
             transition: width 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .skill-bar-fill.visible { width: var(--fill-width); }
 
-        .nav-link { position: relative; transition: color 0.3s ease; }
+        .skill-bar-fill.visible {
+            width: var(--fill-width);
+        }
+
+        /* ===== NAV ===== */
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
         .nav-link::after {
-            content: ''; position: absolute;
-            bottom: -4px; left: 0; width: 0; height: 2px;
-            background: #E30613; transition: width 0.3s ease;
-        }
-        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
-        .nav-link:hover, .nav-link.active { color: #E30613; }
-
-        .project-card-overlay {
-            position: absolute; inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.5), rgba(0,0,0,0.1));
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
-        @media (hover: hover) {
-            .project-card-overlay { opacity: 0; }
-            .project-card:hover .project-card-overlay { opacity: 1; }
-            .project-card:hover .project-card-info { transform: translateY(0); opacity: 1; }
-            .project-card-info { transform: translateY(20px); opacity: 0; transition: all 0.4s ease 0.1s; }
-        }
-        @media (hover: none) {
-            .project-card-info { transform: translateY(0); opacity: 1; }
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #E30613;
+            transition: width 0.3s ease;
         }
 
-        .cursor-dot {
-            width: 8px; height: 8px; background: #E30613; border-radius: 50%;
-            position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.1s ease;
-        }
-        .cursor-ring {
-            width: 35px; height: 35px; border: 2px solid rgba(227, 6, 19, 0.5);
-            border-radius: 50%; position: fixed; pointer-events: none; z-index: 9998; transition: all 0.15s ease;
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
         }
 
+        .nav-link:hover,
+        .nav-link.active {
+            color: #E30613;
+        }
+
+        /* ===== GRADIENT TEXT ===== */
         .gradient-text {
             background: linear-gradient(to right, #E30613, #f87171, #E30613);
             background-size: 200% auto;
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            background-clip: text; animation: gradientShift 3s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 3s ease infinite;
         }
 
-        .section-heading { position: relative; display: inline-block; }
+        /* ===== SECTION HEADING ===== */
+        .section-heading {
+            position: relative;
+            display: inline-block;
+        }
+
         .section-heading::after {
-            content: ''; position: absolute; bottom: -8px; left: 0;
-            width: 60px; height: 3px; background: #E30613; border-radius: 2px;
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: #E30613;
+            border-radius: 2px;
         }
 
+        /* ===== HERO BG ===== */
+        .hero-bg-wrapper {
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .hero-bg-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.4) saturate(0.8);
+        }
+
+        @media (min-width:768px) {
+            .hero-bg-wrapper img {
+                object-position: center 20%;
+            }
+        }
+
+        @media (max-width:767px) {
+            .hero-bg-wrapper img {
+                object-position: center top;
+            }
+        }
+
+        .hero-gradient-overlay {
+            position: absolute;
+            inset: 0;
+        }
+
+        .hero-gradient-overlay::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to right, #050505 0%, rgba(5, 5, 5, 0.85) 40%, rgba(5, 5, 5, 0.4) 70%, rgba(5, 5, 5, 0.3) 100%);
+        }
+
+        .hero-gradient-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, #050505 0%, rgba(5, 5, 5, 0.5) 30%, transparent 60%);
+        }
+
+        @media (max-width:767px) {
+            .hero-gradient-overlay::before {
+                background: linear-gradient(to right, rgba(5, 5, 5, 0.95) 0%, rgba(5, 5, 5, 0.8) 50%, rgba(5, 5, 5, 0.7) 100%);
+            }
+
+            .hero-gradient-overlay::after {
+                background: linear-gradient(to top, #050505 0%, rgba(5, 5, 5, 0.6) 40%, transparent 70%);
+            }
+        }
+
+        /* ===== ABOUT IMG ===== */
+        .about-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.5rem;
+        }
+
+        .about-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.7s ease, opacity 0.5s ease;
+            opacity: 0.85;
+        }
+
+        .about-img-wrapper:hover img {
+            transform: scale(1.05);
+            opacity: 0.95;
+        }
+
+        /* ===== PROJECT CARDS ===== */
+        .project-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.1));
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .project-card-info {
+            transform: translateY(0);
+            opacity: 1;
+            transition: all 0.4s ease 0.1s;
+        }
+
+        @media (hover:hover) {
+            .project-card-overlay {
+                opacity: 0;
+            }
+
+            .project-card:hover .project-card-overlay {
+                opacity: 1;
+            }
+
+            .project-card:hover .project-card-info {
+                transform: translateY(0);
+                opacity: 1;
+            }
+
+            .project-card-info {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+        }
+
+        /* ===== CERT BADGES ===== */
+        .cert-badge {
+            background: rgba(227, 6, 19, 0.1);
+            border: 1px solid rgba(227, 6, 19, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cert-badge:hover {
+            background: rgba(227, 6, 19, 0.2);
+            border-color: rgba(227, 6, 19, 0.4);
+            transform: scale(1.03);
+        }
+
+        .cert-badge:active {
+            transform: scale(0.98);
+        }
+
+        /* ===== HERO PARTICLES ===== */
         .hero-particle {
-            position: absolute; width: 4px; height: 4px;
-            background: rgba(227, 6, 19, 0.3); border-radius: 50%;
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(227, 6, 19, 0.3);
+            border-radius: 50%;
             animation: float 6s ease-in-out infinite;
         }
 
+        /* ===== SCROLL PROGRESS ===== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(to right, #E30613, #f87171);
+            z-index: 10000;
+            transition: width 0.1s linear;
+        }
+
+        /* ===== CUSTOM CURSOR ===== */
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: #E30613;
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease;
+        }
+
+        .cursor-ring {
+            width: 35px;
+            height: 35px;
+            border: 2px solid rgba(227, 6, 19, 0.5);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease;
+        }
+
+        /* ===== MOBILE MENU ===== */
         .mobile-menu {
             transform: translateX(100%);
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .mobile-menu.open { transform: translateX(0); }
 
-        .cert-badge {
-            background: rgba(227, 6, 19, 0.1); border: 1px solid rgba(227, 6, 19, 0.2);
-            transition: all 0.3s ease;
-        }
-        .cert-badge:hover {
-            background: rgba(227, 6, 19, 0.2); border-color: rgba(227, 6, 19, 0.4); transform: scale(1.03);
+        .mobile-menu.open {
+            transform: translateX(0);
         }
 
-        .scroll-progress {
-            position: fixed; top: 0; left: 0; height: 3px;
-            background: linear-gradient(to right, #E30613, #f87171);
-            z-index: 10000; transition: width 0.1s linear;
+        /* ===== MODAL ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9000;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        /* ===== Hero BG ===== */
-        .hero-bg-wrapper { position: absolute; inset: 0; overflow: hidden; }
-        .hero-bg-wrapper img {
-            width: 100%; height: 100%; object-fit: cover;
-            filter: brightness(0.4) saturate(0.8);
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
-        @media (min-width: 768px) {
-            .hero-bg-wrapper img { object-position: center 20%; }
+
+        .modal-content {
+            background: #111;
+            border: 1px solid rgba(227, 6, 19, 0.2);
+            border-radius: 0.75rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 95vh;
+            overflow: hidden;
+            transform: scale(0.92) translateY(20px);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 50px rgba(227, 6, 19, 0.08);
         }
-        @media (max-width: 767px) {
-            .hero-bg-wrapper img { object-position: center top; }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1) translateY(0);
+            opacity: 1;
         }
-        .hero-gradient-overlay { position: absolute; inset: 0; }
-        .hero-gradient-overlay::before {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to right, #050505 0%, rgba(5,5,5,0.85) 40%, rgba(5,5,5,0.4) 70%, rgba(5,5,5,0.3) 100%);
+
+        /* ===== RESPONSIVE BASE ===== */
+        html {
+            font-size: 16px;
         }
-        .hero-gradient-overlay::after {
-            content: ''; position: absolute; inset: 0;
-            background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.5) 30%, transparent 60%);
-        }
-        @media (max-width: 767px) {
-            .hero-gradient-overlay::before {
-                background: linear-gradient(to right, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.8) 50%, rgba(5,5,5,0.7) 100%);
+
+        @media (max-width:374px) {
+            html {
+                font-size: 14px;
             }
-            .hero-gradient-overlay::after {
-                background: linear-gradient(to top, #050505 0%, rgba(5,5,5,0.6) 40%, transparent 70%);
+        }
+
+        @media (max-width:1024px),
+        (hover:none) {
+
+            .cursor-dot,
+            .cursor-ring {
+                display: none !important;
             }
         }
 
-        /* ===== About Image ===== */
-        .about-img-wrapper { position: relative; overflow: hidden; border-radius: 0.5rem; }
-        .about-img-wrapper img {
-            width: 100%; height: 100%; object-fit: cover; object-position: center top;
-            transition: transform 0.7s ease, opacity 0.5s ease; opacity: 0.85;
-        }
-        .about-img-wrapper:hover img { transform: scale(1.05); opacity: 0.95; }
-
-        /* ===== Responsive Typography ===== */
-        html { font-size: 16px; }
-        @media (max-width: 374px) { html { font-size: 14px; } }
-
-        /* ===== Hide cursor on touch ===== */
-        @media (max-width: 1024px), (hover: none) {
-            .cursor-dot, .cursor-ring { display: none !important; }
-        }
-
-        /* ===== Touch-friendly ===== */
-        @media (hover: none) {
-            .glass-panel-hover:hover { transform: none; }
+        @media (hover:none) {
+            .glass-panel-hover:hover {
+                transform: none;
+            }
         }
     </style>
 </head>
+
 <body>
+
     <!-- Scroll Progress -->
-    <div class="scroll-progress" id="scrollProgress" style="width: 0%"></div>
+    <div class="scroll-progress" id="scrollProgress" style="width:0%"></div>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Navigation -->
+    <!-- ===== NAVIGATION ===== -->
     <nav class="fixed top-0 left-0 right-0 z-50 glass-panel h-14 sm:h-16 md:h-20" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 h-full flex items-center justify-between">
             <a href="#hero" class="flex items-center gap-2 sm:gap-3 group">
-                <div class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#E30613] flex items-center justify-center font-['Oswald'] text-base sm:text-xl font-600 transition-transform group-hover:scale-110">B</div>
-                <span class="font-['Oswald'] text-sm sm:text-lg tracking-wide uppercase hidden sm:block">Badr Ayman</span>
+                <div
+                    class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-[#E30613] flex items-center justify-center font-['Oswald'] text-base sm:text-xl font-600 transition-transform group-hover:scale-110">
+                    B</div>
+                <span class="font-['Oswald'] text-sm sm:text-lg tracking-wide uppercase hidden sm:block">Badr
+                    Ayman</span>
             </a>
             <div class="hidden lg:flex items-center gap-6 xl:gap-8">
                 <a href="#hero" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium active">Home</a>
-                <a href="#about" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">About</a>
-                <a href="#experience" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Experience</a>
-                <a href="#skills" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Skills</a>
-                <a href="#projects" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Projects</a>
-                <a href="#contact" class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Contact</a>
+                <a href="#about"
+                    class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">About</a>
+                <a href="#experience"
+                    class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Experience</a>
+                <a href="#skills"
+                    class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Skills</a>
+                <a href="#certifications"
+                    class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Certs</a>
+                <a href="#contact"
+                    class="nav-link text-xs xl:text-sm tracking-wide uppercase font-medium text-gray-400">Contact</a>
             </div>
             <div class="hidden lg:flex items-center gap-4">
-                <a href="https://github.com/badrayman1" target="_blank" class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github" width="22"></iconify-icon></a>
-                <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank" class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin" width="22"></iconify-icon></a>
+                <a href="https://github.com/badrayman1" target="_blank"
+                    class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github"
+                        width="22"></iconify-icon></a>
+                <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank"
+                    class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin"
+                        width="22"></iconify-icon></a>
             </div>
-            <button id="menuBtn" class="lg:hidden text-white p-2 -mr-2" onclick="toggleMenu()" aria-label="Menu">
+            <button class="lg:hidden text-white p-2 -mr-2" onclick="toggleMenu()" aria-label="Menu">
                 <iconify-icon icon="mdi:menu" width="26" id="menuIcon"></iconify-icon>
             </button>
         </div>
     </nav>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu fixed inset-0 z-40 bg-[#050505]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-6 sm:gap-8" id="mobileMenu">
-        <a href="#hero" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Home</a>
-        <a href="#about" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">About</a>
-        <a href="#experience" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Experience</a>
-        <a href="#skills" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Skills</a>
-        <a href="#projects" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Projects</a>
-        <a href="#contact" class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors" onclick="toggleMenu()">Contact</a>
+    <!-- ===== MOBILE MENU ===== -->
+    <div class="mobile-menu fixed inset-0 z-40 bg-[#050505]/98 backdrop-blur-xl flex flex-col items-center justify-center gap-6 sm:gap-8"
+        id="mobileMenu">
+        <a href="#hero"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">Home</a>
+        <a href="#about"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">About</a>
+        <a href="#experience"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">Experience</a>
+        <a href="#skills"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">Skills</a>
+        <a href="#certifications"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">Certifications</a>
+        <a href="#contact"
+            class="text-xl sm:text-2xl font-['Oswald'] uppercase tracking-widest text-gray-300 hover:text-[#E30613] transition-colors"
+            onclick="toggleMenu()">Contact</a>
         <div class="flex gap-6 mt-4">
-            <a href="https://github.com/badrayman1" target="_blank" class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github" width="28"></iconify-icon></a>
-            <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank" class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin" width="28"></iconify-icon></a>
+            <a href="https://github.com/badrayman1" target="_blank"
+                class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github"
+                    width="28"></iconify-icon></a>
+            <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank"
+                class="text-gray-400 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin"
+                    width="28"></iconify-icon></a>
+        </div>
+    </div>
+
+    <!-- ===== CERTIFICATION PDF MODAL ===== -->
+    <div class="modal-overlay" id="certModal" onclick="if(event.target===this)closeCertModal()">
+        <div class="modal-content">
+            <div class="flex items-center justify-between p-4 sm:p-5 border-b border-white/5">
+                <div class="flex items-center gap-3 min-w-0">
+                    <div class="w-10 h-10 rounded-lg bg-[#E30613]/15 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:file-pdf-box" width="22" class="text-[#E30613]"></iconify-icon>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="text-[#E30613] text-[10px] tracking-[0.2em] uppercase font-medium" id="modalCategory">
+                            Certification</p>
+                        <h3 class="font-['Oswald'] text-base sm:text-lg tracking-wide truncate" id="modalTitle">
+                            Certificate</h3>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2 flex-shrink-0">
+                    <a id="pdfDownloadBtn" href="#" download
+                        class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all"
+                        title="Download">
+                        <iconify-icon icon="mdi:download" width="18"></iconify-icon>
+                    </a>
+                    <button onclick="closeCertModal()"
+                        class="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all hover:rotate-90"
+                        title="Close">
+                        <iconify-icon icon="mdi:close" width="18"></iconify-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="relative bg-[#0a0a0a]" style="min-height:450px;max-height:80vh;">
+                <div id="pdfLoading"
+                    class="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-10">
+                    <div
+                        class="w-12 h-12 border-2 border-[#E30613]/30 border-t-[#E30613] rounded-full animate-spin mb-4">
+                    </div>
+                    <p class="text-gray-500 text-sm">Loading certificate...</p>
+                </div>
+                <div id="pdfNotFound"
+                    class="absolute inset-0 flex flex-col items-center justify-center bg-[#0a0a0a] z-10 hidden">
+                    <div class="w-20 h-20 rounded-full bg-red-500/10 flex items-center justify-center mb-4">
+                        <iconify-icon icon="mdi:file-alert-outline" width="40" class="text-red-400"></iconify-icon>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-1">Certificate PDF not found</p>
+                    <p class="text-gray-600 text-xs" id="pdfNotFoundPath"></p>
+                </div>
+                <iframe id="pdfFrame" class="w-full hidden" style="height:80vh;min-height:450px;border:none;"
+                    onload="pdfLoaded()"></iframe>
+            </div>
         </div>
     </div>
 
     <!-- ===== HERO ===== -->
-    <section id="hero" class="relative h-screen min-h-[500px] sm:min-h-[600px] flex items-center justify-center overflow-hidden">
+    <section id="hero"
+        class="relative h-screen min-h-[500px] sm:min-h-[600px] flex items-center justify-center overflow-hidden">
         <div class="hero-bg-wrapper">
-            <picture>
-                <img src="Screenshot_2025-12-25-21-00-23-669_com.instagram.android-edit.jpg" alt="Badr Ayman" loading="eager">
-            </picture>
+            <img src="Screenshot_2025-12-25-21-00-23-669_com.instagram.android-edit.jpg" alt="Badr Ayman"
+                loading="eager">
         </div>
         <div class="hero-gradient-overlay"></div>
-        <div class="absolute top-1/4 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#E30613]/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div
+            class="absolute top-1/4 right-1/4 w-48 sm:w-96 h-48 sm:h-96 bg-[#E30613]/5 rounded-full blur-3xl pointer-events-none">
+        </div>
 
         <div class="hero-particle" style="top:20%;left:15%;animation-delay:0s;animation-duration:5s;"></div>
         <div class="hero-particle" style="top:60%;left:80%;animation-delay:1s;animation-duration:7s;"></div>
         <div class="hero-particle" style="top:30%;left:60%;animation-delay:2s;animation-duration:6s;"></div>
-        <div class="hero-particle hidden sm:block" style="top:70%;left:25%;animation-delay:0.5s;animation-duration:8s;"></div>
-        <div class="hero-particle hidden sm:block" style="top:45%;left:90%;animation-delay:1.5s;animation-duration:5.5s;"></div>
+        <div class="hero-particle hidden sm:block" style="top:70%;left:25%;animation-delay:0.5s;animation-duration:8s;">
+        </div>
+        <div class="hero-particle hidden sm:block"
+            style="top:45%;left:90%;animation-delay:1.5s;animation-duration:5.5s;"></div>
 
         <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 w-full">
             <div class="max-w-3xl">
-                <p class="text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-3 sm:mb-4" style="animation: fadeUp 0.8s ease forwards; animation-delay: 0.2s; opacity: 0;">
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                    Hello, I'm
+                <p class="text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-3 sm:mb-4"
+                    style="animation:fadeUp 0.8s ease forwards;animation-delay:0.2s;opacity:0;">
+                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>Hello,
+                    I'm
                 </p>
-                <h1 class="font-['Oswald'] text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-500 tracking-tight leading-[1.1] mb-3 sm:mb-4" style="animation: fadeUp 0.8s ease forwards; animation-delay: 0.4s; opacity: 0;">
+                <h1 class="font-['Oswald'] text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-500 tracking-tight leading-[1.1] mb-3 sm:mb-4"
+                    style="animation:fadeUp 0.8s ease forwards;animation-delay:0.4s;opacity:0;">
                     Badr <span class="gradient-text">Ayman</span>
                 </h1>
-                <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6" style="animation: fadeUp 0.8s ease forwards; animation-delay: 0.6s; opacity: 0;">
+                <div class="flex items-center gap-2 sm:gap-3 mb-4 sm:mb-6"
+                    style="animation:fadeUp 0.8s ease forwards;animation-delay:0.6s;opacity:0;">
                     <div class="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-[#E30613] animate-pulse"></div>
                     <p class="text-gray-400 text-sm sm:text-lg md:text-xl tracking-wide">
                         <span id="typewriter"></span><span class="text-[#E30613]">|</span>
                     </p>
                 </div>
-                <p class="text-gray-400 font-light leading-relaxed max-w-xl mb-6 sm:mb-8 text-xs sm:text-sm md:text-base" style="animation: fadeUp 0.8s ease forwards; animation-delay: 0.8s; opacity: 0;">
-                    Passionate Full-Stack Developer building responsive web applications with modern technologies. Based in Alexandria, Egypt.
+                <p class="text-gray-400 font-light leading-relaxed max-w-xl mb-6 sm:mb-8 text-xs sm:text-sm md:text-base"
+                    style="animation:fadeUp 0.8s ease forwards;animation-delay:0.8s;opacity:0;">
+                    Passionate Full-Stack Developer building responsive web applications with modern technologies. Based
+                    in Alexandria, Egypt.
                 </p>
-                <div class="flex flex-wrap gap-3 sm:gap-4" style="animation: fadeUp 0.8s ease forwards; animation-delay: 1s; opacity: 0;">
-                    <a href="#projects" class="bg-[#E30613] hover:bg-[#b91c1c] text-white px-5 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-colors duration-300 flex items-center gap-2">
-                        View My Work
-                        <iconify-icon icon="mdi:arrow-right" width="16" class="sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:arrow-right" width="18" class="hidden sm:inline-block"></iconify-icon>
-                    </a>
-                    <a href="#contact" class="border border-white/20 hover:border-[#E30613] text-white px-5 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-all duration-300 hover:bg-[#E30613]/10">
-                        Contact Me
-                    </a>
-                </div>
 
-                <div class="flex gap-8 sm:gap-12 mt-8 sm:mt-14" style="animation: fadeUp 0.8s ease forwards; animation-delay: 1.2s; opacity: 0;">
+                <div class="flex gap-8 sm:gap-12 mt-8 sm:mt-14"
+                    style="animation:fadeUp 0.8s ease forwards;animation-delay:1.2s;opacity:0;">
                     <div>
                         <p class="font-['Oswald'] text-2xl sm:text-3xl md:text-4xl text-white" id="statProjects">0</p>
                         <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase mt-1">Projects</p>
                     </div>
                     <div>
-                        <p class="font-['Oswald'] text-2xl sm:text-3xl md:text-4xl text-white" id="statTechnologies">0</p>
+                        <p class="font-['Oswald'] text-2xl sm:text-3xl md:text-4xl text-white" id="statTechnologies">0
+                        </p>
                         <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase mt-1">Technologies</p>
                     </div>
                     <div>
-                        <p class="font-['Oswald'] text-2xl sm:text-3xl md:text-4xl text-white" id="statCertifications">0</p>
-                        <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase mt-1">Certifications</p>
+                        <p class="font-['Oswald'] text-2xl sm:text-3xl md:text-4xl text-white" id="statCertifications">0
+                        </p>
+                        <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase mt-1">Certifications
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style="animation: fadeUp 0.8s ease forwards; animation-delay: 1.5s; opacity: 0;">
+        <div class="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
+            style="animation:fadeUp 0.8s ease forwards;animation-delay:1.5s;opacity:0;">
             <span class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase">Scroll</span>
             <div class="w-[1px] h-8 sm:h-12 bg-gradient-to-b from-[#E30613] to-transparent animate-bounce"></div>
         </div>
@@ -303,17 +643,20 @@
     <section id="about" class="py-12 sm:py-16 md:py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 items-center">
-                <!-- Image -->
                 <div class="fade-up relative">
                     <div class="about-img-wrapper h-[350px] sm:h-[450px] md:h-[500px] lg:h-[600px]">
                         <img src="1740475412697.jfif" alt="Badr Ayman" loading="lazy">
-                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent">
+                        </div>
                     </div>
-                    <div class="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 w-full h-full border border-[#E30613]/30 rounded-lg -z-10 hidden sm:block"></div>
-                    <div class="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-6 glass-panel rounded-lg p-3 sm:p-4 flex items-center gap-2 sm:gap-3" style="animation: float 6s ease-in-out infinite;">
-                        <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E30613]/20 flex items-center justify-center">
-                            <iconify-icon icon="mdi:code-braces" width="20" class="sm:hidden text-[#E30613]"></iconify-icon>
-                            <iconify-icon icon="mdi:code-braces" width="24" class="hidden sm:block text-[#E30613]"></iconify-icon>
+                    <div
+                        class="absolute -bottom-3 sm:-bottom-4 -right-3 sm:-right-4 w-full h-full border border-[#E30613]/30 rounded-lg -z-10 hidden sm:block">
+                    </div>
+                    <div class="absolute -bottom-4 sm:-bottom-6 -left-2 sm:-left-6 glass-panel rounded-lg p-3 sm:p-4 flex items-center gap-2 sm:gap-3"
+                        style="animation:float 6s ease-in-out infinite;">
+                        <div
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E30613]/20 flex items-center justify-center">
+                            <iconify-icon icon="mdi:code-braces" width="22" class="text-[#E30613]"></iconify-icon>
                         </div>
                         <div>
                             <p class="font-['Oswald'] text-sm sm:text-lg">Full-Stack</p>
@@ -322,48 +665,46 @@
                     </div>
                 </div>
 
-                <!-- Content -->
                 <div>
-                    <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                        <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                        About Me
+                    <p
+                        class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                        <span
+                            class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>About
+                        Me
                     </p>
-                    <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight mb-4 sm:mb-6 section-heading">
+                    <h2
+                        class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight mb-4 sm:mb-6 section-heading">
                         Crafting Digital<br><span class="gradient-text">Experiences</span>
                     </h2>
-                    <p class="fade-up text-gray-400 font-light leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm md:text-base">
-                        Passionate Full-Stack Developer with experience in building responsive web applications using modern frontend and backend technologies. Skilled in React, Node.js, Laravel, REST APIs, PHP, MySQL, and database management.
+                    <p
+                        class="fade-up text-gray-400 font-light leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm md:text-base">
+                        Passionate Full-Stack Developer with experience in building responsive web applications using
+                        modern frontend and backend technologies. Skilled in React, Node.js, Laravel, REST APIs, PHP,
+                        MySQL, and database management.
                     </p>
-                    <p class="fade-up text-gray-400 font-light leading-relaxed mb-6 sm:mb-8 text-xs sm:text-sm md:text-base">
-                        Eager to contribute to innovative projects and continuously improve technical skills. I thrive in collaborative environments and enjoy mentoring junior developers to reach their full potential.
+                    <p
+                        class="fade-up text-gray-400 font-light leading-relaxed mb-6 sm:mb-8 text-xs sm:text-sm md:text-base">
+                        Eager to contribute to innovative projects and continuously improve technical skills. I thrive
+                        in collaborative environments and enjoy mentoring junior developers to reach their full
+                        potential.
                     </p>
-
                     <div class="fade-up grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 mb-6 sm:mb-8">
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <iconify-icon icon="mdi:map-marker" width="18" class="text-[#E30613] flex-shrink-0 sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:map-marker" width="20" class="text-[#E30613] flex-shrink-0 hidden sm:block"></iconify-icon>
-                            <span class="text-gray-300 text-xs sm:text-sm">Alexandria, Egypt</span>
-                        </div>
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <iconify-icon icon="mdi:email-outline" width="18" class="text-[#E30613] flex-shrink-0 sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:email-outline" width="20" class="text-[#E30613] flex-shrink-0 hidden sm:block"></iconify-icon>
-                            <span class="text-gray-300 text-xs sm:text-sm truncate">baderayman971@gmail.com</span>
-                        </div>
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <iconify-icon icon="mdi:phone" width="18" class="text-[#E30613] flex-shrink-0 sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:phone" width="20" class="text-[#E30613] flex-shrink-0 hidden sm:block"></iconify-icon>
-                            <span class="text-gray-300 text-xs sm:text-sm">+01270781251</span>
-                        </div>
-                        <div class="flex items-center gap-2 sm:gap-3">
-                            <iconify-icon icon="mdi:school-outline" width="18" class="text-[#E30613] flex-shrink-0 sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:school-outline" width="20" class="text-[#E30613] flex-shrink-0 hidden sm:block"></iconify-icon>
-                            <span class="text-gray-300 text-xs sm:text-sm">Borg El Arab Uni</span>
-                        </div>
+                        <div class="flex items-center gap-2 sm:gap-3"><iconify-icon icon="mdi:map-marker" width="18"
+                                class="text-[#E30613] flex-shrink-0"></iconify-icon><span
+                                class="text-gray-300 text-xs sm:text-sm">Alexandria, Egypt</span></div>
+                        <div class="flex items-center gap-2 sm:gap-3"><iconify-icon icon="mdi:email-outline" width="18"
+                                class="text-[#E30613] flex-shrink-0"></iconify-icon><span
+                                class="text-gray-300 text-xs sm:text-sm truncate">baderayman971@gmail.com</span></div>
+                        <div class="flex items-center gap-2 sm:gap-3"><iconify-icon icon="mdi:phone" width="18"
+                                class="text-[#E30613] flex-shrink-0"></iconify-icon><span
+                                class="text-gray-300 text-xs sm:text-sm">+01270781251</span></div>
+                        <div class="flex items-center gap-2 sm:gap-3"><iconify-icon icon="mdi:school-outline" width="18"
+                                class="text-[#E30613] flex-shrink-0"></iconify-icon><span
+                                class="text-gray-300 text-xs sm:text-sm">Borg El Arab Uni</span></div>
                     </div>
-
-                    <a href="#contact" class="fade-up inline-flex items-center gap-2 bg-[#E30613] hover:bg-[#b91c1c] text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-colors duration-300">
-                        Get In Touch
-                        <iconify-icon icon="mdi:arrow-right" width="18"></iconify-icon>
+                    <a href="#contact"
+                        class="fade-up inline-flex items-center gap-2 bg-[#E30613] hover:bg-[#b91c1c] text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-colors duration-300">
+                        Get In Touch <iconify-icon icon="mdi:arrow-right" width="18"></iconify-icon>
                     </a>
                 </div>
             </div>
@@ -374,86 +715,100 @@
     <section id="experience" class="py-12 sm:py-16 md:py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-10 sm:mb-16">
-                <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                    Career Path
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
+                <p
+                    class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>Career
+                    Path<span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
                 </p>
-                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                    Work <span class="gradient-text">Experience</span>
-                </h2>
+                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight">Work <span
+                        class="gradient-text">Experience</span></h2>
             </div>
 
             <div class="max-w-4xl mx-auto relative">
-                <!-- Timeline -->
-                <div class="absolute left-[18px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#E30613] via-[#E30613]/50 to-transparent hidden md:block"></div>
-
+                <div
+                    class="absolute left-[18px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-[#E30613] via-[#E30613]/50 to-transparent hidden md:block">
+                </div>
                 <div class="space-y-6 sm:space-y-8 md:space-y-12">
-                    <!-- Experience 1 -->
+                    <!-- Frontend -->
                     <div class="fade-up relative pl-0 md:pl-14">
-                        <div class="absolute left-[11px] top-[30px] w-[14px] h-[14px] rounded-full bg-[#E30613] border-3 border-[#050505] z-2 hidden md:block"></div>
+                        <div
+                            class="hidden md:block absolute left-[11px] top-[30px] w-[14px] h-[14px] rounded-full bg-[#E30613] border-[3px] border-[#050505] z-[2]">
+                        </div>
                         <div class="glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8">
                             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                                <span class="bg-[#E30613]/10 text-[#E30613] px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs tracking-widest uppercase font-medium">Frontend</span>
+                                <span
+                                    class="bg-[#E30613]/10 text-[#E30613] px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs tracking-widest uppercase font-medium">Frontend</span>
                                 <span class="text-gray-500 text-[10px] sm:text-sm">Apr 2024 – Present</span>
                             </div>
-                            <h3 class="font-['Oswald'] text-lg sm:text-xl md:text-2xl tracking-wide mb-1">Front-end Developer</h3>
+                            <h3 class="font-['Oswald'] text-lg sm:text-xl md:text-2xl tracking-wide mb-1">Front-end
+                                Developer</h3>
                             <p class="text-[#E30613] text-xs sm:text-sm mb-3 sm:mb-4">Freelance</p>
                             <ul class="space-y-2 sm:space-y-3">
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Developed responsive and mobile-first web applications using React and JavaScript.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Developed responsive
+                                    and mobile-first web applications using React and JavaScript.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Collaborated with UX/UI teams to improve design consistency and user experience.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Collaborated with
+                                    UX/UI teams to improve design consistency and user experience.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Integrated REST APIs seamlessly into frontend applications.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Integrated REST APIs
+                                    seamlessly into frontend applications.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Trained junior developers and supported collaborative workflows.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Trained junior
+                                    developers and supported collaborative workflows.
                                 </li>
                             </ul>
                         </div>
                     </div>
-
-                    <!-- Experience 2 -->
+                    <!-- Backend -->
                     <div class="fade-up relative pl-0 md:pl-14">
-                        <div class="absolute left-[11px] top-[30px] w-[14px] h-[14px] rounded-full bg-[#E30613] border-3 border-[#050505] z-2 hidden md:block"></div>
+                        <div
+                            class="hidden md:block absolute left-[11px] top-[30px] w-[14px] h-[14px] rounded-full bg-[#E30613] border-[3px] border-[#050505] z-[2]">
+                        </div>
                         <div class="glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8">
                             <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-                                <span class="bg-[#E30613]/10 text-[#E30613] px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs tracking-widest uppercase font-medium">Backend</span>
+                                <span
+                                    class="bg-[#E30613]/10 text-[#E30613] px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs tracking-widest uppercase font-medium">Backend</span>
                                 <span class="text-gray-500 text-[10px] sm:text-sm">Apr 2024 – Present</span>
                             </div>
-                            <h3 class="font-['Oswald'] text-lg sm:text-xl md:text-2xl tracking-wide mb-1">Back-end Developer</h3>
+                            <h3 class="font-['Oswald'] text-lg sm:text-xl md:text-2xl tracking-wide mb-1">Back-end
+                                Developer</h3>
                             <p class="text-[#E30613] text-xs sm:text-sm mb-3 sm:mb-4">Freelance</p>
                             <ul class="space-y-2 sm:space-y-3">
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Built scalable backend systems using Node.js and PHP.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Built scalable
+                                    backend systems using Node.js and PHP.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Developed and integrated RESTful APIs for web applications.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Developed and
+                                    integrated RESTful APIs for web applications.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Worked with MySQL databases and backend architecture optimization.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Worked with MySQL
+                                    databases and backend architecture optimization.
                                 </li>
-                                <li class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
-                                    <iconify-icon icon="mdi:chevron-right" width="16" class="text-[#E30613] mt-0.5 flex-shrink-0 sm:hidden"></iconify-icon>
-                                    <iconify-icon icon="mdi:chevron-right" width="18" class="text-[#E30613] mt-0.5 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                    Utilized cloud services and deployment tools for scalable applications.
+                                <li
+                                    class="flex items-start gap-2 sm:gap-3 text-gray-400 font-light text-xs sm:text-sm leading-relaxed">
+                                    <iconify-icon icon="mdi:chevron-right" width="16"
+                                        class="text-[#E30613] mt-0.5 flex-shrink-0"></iconify-icon>Utilized cloud
+                                    services and deployment tools for scalable applications.
                                 </li>
                             </ul>
                         </div>
@@ -464,57 +819,54 @@
             <!-- Education -->
             <div class="mt-16 sm:mt-20 md:mt-24">
                 <div class="text-center mb-10 sm:mb-16">
-                    <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                        <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                        Learning Journey
-                        <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
+                    <p
+                        class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                        <span
+                            class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>Learning
+                        Journey<span
+                            class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
                     </p>
-                    <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                        <span class="gradient-text">Education</span>
-                    </h2>
+                    <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight"><span
+                            class="gradient-text">Education</span></h2>
                 </div>
-
                 <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                     <div class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-3 sm:mb-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E30613]/10 flex items-center justify-center">
-                                <iconify-icon icon="mdi:school" width="20" class="text-[#E30613] sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:school" width="24" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                            <div
+                                class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E30613]/10 flex items-center justify-center">
+                                <iconify-icon icon="mdi:school" width="22" class="text-[#E30613]"></iconify-icon>
                             </div>
                             <span class="text-gray-500 text-xs sm:text-sm">2022 – 2025</span>
                         </div>
-                        <h3 class="font-['Oswald'] text-base sm:text-xl tracking-wide mb-1">WE Applied Technology Schools</h3>
+                        <h3 class="font-['Oswald'] text-base sm:text-xl tracking-wide mb-1">WE Applied Technology
+                            Schools</h3>
                         <p class="text-[#E30613] text-xs sm:text-sm mb-2 sm:mb-3">Third Degree, Alexandria</p>
                         <ul class="space-y-1.5 sm:space-y-2">
-                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm">
-                                <iconify-icon icon="mdi:star" width="12" class="text-[#E30613] mt-1 flex-shrink-0 sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:star" width="14" class="text-[#E30613] mt-1 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                Graduated with honors in a school degree program.
-                            </li>
-                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm">
-                                <iconify-icon icon="mdi:star" width="12" class="text-[#E30613] mt-1 flex-shrink-0 sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:star" width="14" class="text-[#E30613] mt-1 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                Received an academic scholarship for outstanding performance.
-                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm"><iconify-icon
+                                    icon="mdi:star" width="13"
+                                    class="text-[#E30613] mt-1 flex-shrink-0"></iconify-icon>Graduated with honors in a
+                                school degree program.</li>
+                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm"><iconify-icon
+                                    icon="mdi:star" width="13"
+                                    class="text-[#E30613] mt-1 flex-shrink-0"></iconify-icon>Received an academic
+                                scholarship for outstanding performance.</li>
                         </ul>
                     </div>
-
                     <div class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8">
                         <div class="flex items-center gap-3 mb-3 sm:mb-4">
-                            <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E30613]/10 flex items-center justify-center">
-                                <iconify-icon icon="mdi:school" width="20" class="text-[#E30613] sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:school" width="24" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                            <div
+                                class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-[#E30613]/10 flex items-center justify-center">
+                                <iconify-icon icon="mdi:school" width="22" class="text-[#E30613]"></iconify-icon>
                             </div>
                             <span class="text-gray-500 text-xs sm:text-sm">2025 – 2029</span>
                         </div>
                         <h3 class="font-['Oswald'] text-base sm:text-xl tracking-wide mb-1">Borg El Arab University</h3>
                         <p class="text-[#E30613] text-xs sm:text-sm mb-2 sm:mb-3">First Degree, Borg El Arab</p>
                         <ul class="space-y-1.5 sm:space-y-2">
-                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm">
-                                <iconify-icon icon="mdi:star" width="12" class="text-[#E30613] mt-1 flex-shrink-0 sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:star" width="14" class="text-[#E30613] mt-1 flex-shrink-0 hidden sm:block"></iconify-icon>
-                                Pursuing university degree in technology field.
-                            </li>
+                            <li class="flex items-start gap-2 text-gray-400 font-light text-xs sm:text-sm"><iconify-icon
+                                    icon="mdi:star" width="13"
+                                    class="text-[#E30613] mt-1 flex-shrink-0"></iconify-icon>Pursuing university degree
+                                in technology field.</li>
                         </ul>
                     </div>
                 </div>
@@ -526,119 +878,129 @@
     <section id="skills" class="py-12 sm:py-16 md:py-24 relative overflow-hidden">
         <div class="absolute top-0 right-0 w-48 sm:w-96 h-48 sm:h-96 bg-[#E30613]/5 rounded-full blur-3xl"></div>
         <div class="absolute bottom-0 left-0 w-48 sm:w-96 h-48 sm:h-96 bg-[#E30613]/5 rounded-full blur-3xl"></div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <div class="text-center mb-10 sm:mb-16">
-                <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                    What I Do
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
+                <p
+                    class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>What I
+                    Do<span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
                 </p>
-                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                    Technical <span class="gradient-text">Skills</span>
+                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight">Technical
+                    <span class="gradient-text">Skills</span>
                 </h2>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12 sm:mb-16">
                 <div class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8 text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <iconify-icon icon="mdi:monitor-dashboard" width="24" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:monitor-dashboard" width="32" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                        <iconify-icon icon="mdi:monitor-dashboard" width="28" class="text-[#E30613]"></iconify-icon>
                     </div>
                     <h3 class="font-['Oswald'] text-lg sm:text-xl tracking-wide mb-2 sm:mb-3">Frontend</h3>
-                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Building responsive, interactive user interfaces</p>
+                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Building responsive, interactive
+                        user interfaces</p>
                     <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">React.js</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">JavaScript</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">CSS</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Dart</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">React.js</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">JavaScript</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">CSS</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Dart</span>
                     </div>
                 </div>
-
                 <div class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8 text-center">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <iconify-icon icon="mdi:server" width="24" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:server" width="32" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                        <iconify-icon icon="mdi:server" width="28" class="text-[#E30613]"></iconify-icon>
                     </div>
                     <h3 class="font-['Oswald'] text-lg sm:text-xl tracking-wide mb-2 sm:mb-3">Backend</h3>
-                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Designing scalable server-side architectures</p>
+                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Designing scalable server-side
+                        architectures</p>
                     <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Node.js</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">PHP</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Laravel</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">RESTful APIs</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Node.js</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">PHP</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Laravel</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">RESTful
+                            APIs</span>
                     </div>
                 </div>
-
-                <div class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8 text-center sm:col-span-2 md:col-span-1">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                        <iconify-icon icon="mdi:database" width="24" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:database" width="32" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                <div
+                    class="fade-up glass-panel-hover rounded-lg p-5 sm:p-6 md:p-8 text-center sm:col-span-2 md:col-span-1">
+                    <div
+                        class="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-[#E30613]/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
+                        <iconify-icon icon="mdi:database" width="28" class="text-[#E30613]"></iconify-icon>
                     </div>
                     <h3 class="font-['Oswald'] text-lg sm:text-xl tracking-wide mb-2 sm:mb-3">Database & Tools</h3>
-                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Managing data and optimizing performance</p>
+                    <p class="text-gray-500 font-light text-xs sm:text-sm mb-4 sm:mb-6">Managing data and optimizing
+                        performance</p>
                     <div class="flex flex-wrap justify-center gap-1.5 sm:gap-2">
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">MySQL</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">OOP</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Backend Arch.</span>
-                        <span class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Problem Solving</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">MySQL</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">OOP</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Backend
+                            Arch.</span>
+                        <span
+                            class="bg-white/5 border border-white/10 text-gray-300 px-2 sm:px-3 py-1 sm:py-1.5 rounded-full text-[10px] sm:text-xs tracking-wide">Problem
+                            Solving</span>
                     </div>
                 </div>
             </div>
 
             <div class="max-w-3xl mx-auto space-y-4 sm:space-y-6">
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">React.js</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">90%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">React.js</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">90%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 90%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:90%"></div>
                     </div>
                 </div>
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">Node.js</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">85%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">Node.js</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">85%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 85%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:85%"></div>
                     </div>
                 </div>
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">PHP / Laravel</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">85%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">PHP / Laravel</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">85%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 85%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:85%"></div>
                     </div>
                 </div>
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">JavaScript</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">90%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">JavaScript</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">90%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 90%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:90%"></div>
                     </div>
                 </div>
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">MySQL</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">80%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">MySQL</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">80%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 80%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:80%"></div>
                     </div>
                 </div>
                 <div class="fade-up">
-                    <div class="flex justify-between mb-1.5 sm:mb-2">
-                        <span class="text-xs sm:text-sm font-medium tracking-wide">RESTful APIs</span>
-                        <span class="text-[#E30613] text-xs sm:text-sm">88%</span>
-                    </div>
+                    <div class="flex justify-between mb-1.5 sm:mb-2"><span
+                            class="text-xs sm:text-sm font-medium tracking-wide">RESTful APIs</span><span
+                            class="text-[#E30613] text-xs sm:text-sm">88%</span></div>
                     <div class="w-full h-1.5 sm:h-2 bg-white/5 rounded-full overflow-hidden">
-                        <div class="skill-bar-fill" style="--fill-width: 88%"></div>
+                        <div class="skill-bar-fill" style="--fill-width:88%"></div>
                     </div>
                 </div>
             </div>
@@ -649,134 +1011,152 @@
     <section id="certifications" class="py-12 sm:py-16 md:py-24 relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center mb-10 sm:mb-16">
-                <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                    Achievements
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
+                <p
+                    class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                    <span
+                        class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>Achievements<span
+                        class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
                 </p>
-                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                    Certifications & <span class="gradient-text">Activities</span>
-                </h2>
+                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight">
+                    Certifications & <span class="gradient-text">Activities</span></h2>
+                <p class="fade-up text-gray-500 font-light text-xs sm:text-sm mt-3 sm:mt-4">Click to view certificate
+                    PDF</p>
             </div>
-
             <div class="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:trophy" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:trophy" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(0)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:trophy" width="19" class="text-[#E30613]"></iconify-icon>
                     </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">ICPC Egyptian Teens QPC</p>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">ICPC Egyptian Teens QPC</p>
+                        <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2026</p>
+                    </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
+                </div>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(1)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:trophy" width="19" class="text-[#E30613]"></iconify-icon>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">ICPC Egyptian Teens OQPC</p>
+                        <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2026</p>
+                    </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
+                </div>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(2)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:rocket-launch" width="19" class="text-[#E30613]"></iconify-icon>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">TechTank Participation</p>
                         <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2025</p>
                     </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
                 </div>
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:trophy" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:trophy" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(3)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:trophy" width="19" class="text-[#E30613]"></iconify-icon>
                     </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">ICPC Egyptian Teens OQPC</p>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">ICPC Egyptian Teens OQPC</p>
                         <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2025</p>
                     </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
                 </div>
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:rocket-launch" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:rocket-launch" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(4)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:trophy" width="19" class="text-[#E30613]"></iconify-icon>
                     </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">TechTank Participation</p>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">ICPC Egyptian Teens QPC</p>
                         <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2025</p>
                     </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
                 </div>
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:trophy" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:trophy" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4"
+                    onclick="openCertModal(5)" role="button" tabindex="0">
+                    <div
+                        class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
+                        <iconify-icon icon="mdi:lightbulb-on" width="19" class="text-[#E30613]"></iconify-icon>
                     </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">ICPC Egyptian Teens OQPC</p>
+                    <div class="min-w-0 flex-1">
+                        <p class="text-xs sm:text-sm font-medium truncate">Ready For Tomorrow</p>
                         <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2024</p>
                     </div>
-                </div>
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:trophy" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:trophy" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
-                    </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">ICPC Egyptian Teens QPC</p>
-                        <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2024</p>
-                    </div>
-                </div>
-                <div class="fade-up cert-badge rounded-lg p-4 sm:p-5 flex items-center gap-3 sm:gap-4">
-                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-[#E30613]/20 flex items-center justify-center flex-shrink-0">
-                        <iconify-icon icon="mdi:lightbulb-on" width="18" class="text-[#E30613] sm:hidden"></iconify-icon>
-                        <iconify-icon icon="mdi:lightbulb-on" width="20" class="text-[#E30613] hidden sm:block"></iconify-icon>
-                    </div>
-                    <div>
-                        <p class="text-xs sm:text-sm font-medium">Ready For Tomorrow</p>
-                        <p class="text-gray-500 text-[10px] sm:text-xs mt-0.5">2024</p>
-                    </div>
+                    <iconify-icon icon="mdi:eye-outline" width="16" class="text-gray-600 flex-shrink-0"></iconify-icon>
                 </div>
             </div>
         </div>
     </section>
 
+
     <!-- ===== CONTACT ===== -->
     <section id="contact" class="py-12 sm:py-16 md:py-24 relative">
         <div class="absolute inset-0 opacity-5 pointer-events-none">
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[400px] md:w-[600px] h-[200px] sm:h-[400px] md:h-[600px] border border-[#E30613] rounded-full"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] sm:w-[300px] md:w-[400px] h-[150px] sm:h-[300px] md:h-[400px] border border-[#E30613] rounded-full"></div>
-            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100px] sm:w-[150px] md:w-[200px] h-[100px] sm:h-[150px] md:h-[200px] border border-[#E30613] rounded-full"></div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] sm:w-[600px] h-[200px] sm:h-[600px] border border-[#E30613] rounded-full">
+            </div>
+            <div
+                class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[150px] sm:w-[400px] h-[150px] sm:h-[400px] border border-[#E30613] rounded-full">
+            </div>
         </div>
-
         <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
             <div class="text-center mb-10 sm:mb-16">
-                <p class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>
-                    Get In Touch
-                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
+                <p
+                    class="fade-up text-[#E30613] text-[10px] sm:text-sm tracking-[0.2em] sm:tracking-[0.3em] uppercase font-medium mb-2 sm:mb-3">
+                    <span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] mr-2 sm:mr-3 align-middle"></span>Get In
+                    Touch<span class="inline-block w-5 sm:w-8 h-[2px] bg-[#E30613] ml-2 sm:ml-3 align-middle"></span>
                 </p>
-                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight leading-tight">
-                    Let's Work <span class="gradient-text">Together</span>
+                <h2 class="fade-up font-['Oswald'] text-2xl sm:text-3xl md:text-5xl font-500 tracking-tight">Let's Work
+                    <span class="gradient-text">Together</span>
                 </h2>
             </div>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 md:gap-16 max-w-5xl mx-auto">
                 <div>
-                    <p class="fade-up text-gray-400 font-light leading-relaxed mb-6 sm:mb-8 text-xs sm:text-sm md:text-base">
-                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Feel free to reach out!
-                    </p>
-
+                    <p
+                        class="fade-up text-gray-400 font-light leading-relaxed mb-6 sm:mb-8 text-xs sm:text-sm md:text-base">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to be part of your
+                        vision. Feel free to reach out!</p>
                     <div class="space-y-4 sm:space-y-6">
                         <a href="mailto:baderayman971@gmail.com" class="fade-up flex items-center gap-3 sm:gap-4 group">
-                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center group-hover:bg-[#E30613]/20 transition-colors flex-shrink-0">
-                                <iconify-icon icon="mdi:email-outline" width="20" class="text-[#E30613] sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:email-outline" width="24" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                            <div
+                                class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center group-hover:bg-[#E30613]/20 transition-colors flex-shrink-0">
+                                <iconify-icon icon="mdi:email-outline" width="22" class="text-[#E30613]"></iconify-icon>
                             </div>
                             <div class="min-w-0">
                                 <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase">Email</p>
-                                <p class="text-gray-300 group-hover:text-[#E30613] transition-colors text-xs sm:text-sm truncate">baderayman971@gmail.com</p>
+                                <p
+                                    class="text-gray-300 group-hover:text-[#E30613] transition-colors text-xs sm:text-sm truncate">
+                                    baderayman971@gmail.com</p>
                             </div>
                         </a>
-
                         <a href="tel:+01270781251" class="fade-up flex items-center gap-3 sm:gap-4 group">
-                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center group-hover:bg-[#E30613]/20 transition-colors flex-shrink-0">
-                                <iconify-icon icon="mdi:phone-outline" width="20" class="text-[#E30613] sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:phone-outline" width="24" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                            <div
+                                class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center group-hover:bg-[#E30613]/20 transition-colors flex-shrink-0">
+                                <iconify-icon icon="mdi:phone-outline" width="22" class="text-[#E30613]"></iconify-icon>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase">Phone</p>
-                                <p class="text-gray-300 group-hover:text-[#E30613] transition-colors text-xs sm:text-sm">+01270781251</p>
+                                <p
+                                    class="text-gray-300 group-hover:text-[#E30613] transition-colors text-xs sm:text-sm">
+                                    +01270781251</p>
                             </div>
                         </a>
-
                         <div class="fade-up flex items-center gap-3 sm:gap-4">
-                            <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center flex-shrink-0">
-                                <iconify-icon icon="mdi:map-marker-outline" width="20" class="text-[#E30613] sm:hidden"></iconify-icon>
-                                <iconify-icon icon="mdi:map-marker-outline" width="24" class="text-[#E30613] hidden sm:block"></iconify-icon>
+                            <div
+                                class="w-11 h-11 sm:w-14 sm:h-14 rounded-lg bg-[#E30613]/10 flex items-center justify-center flex-shrink-0">
+                                <iconify-icon icon="mdi:map-marker-outline" width="22"
+                                    class="text-[#E30613]"></iconify-icon>
                             </div>
                             <div>
                                 <p class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase">Location</p>
@@ -784,47 +1164,46 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="fade-up flex gap-3 sm:gap-4 mt-8 sm:mt-10">
-                        <a href="https://github.com/badrayman1" target="_blank" class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300">
-                            <iconify-icon icon="mdi:github" width="20" class="sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:github" width="22" class="hidden sm:block"></iconify-icon>
-                        </a>
-                        <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank" class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300">
-                            <iconify-icon icon="mdi:linkedin" width="20" class="sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:linkedin" width="22" class="hidden sm:block"></iconify-icon>
-                        </a>
-                        <a href="mailto:baderayman971@gmail.com" class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300">
-                            <iconify-icon icon="mdi:email" width="20" class="sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:email" width="22" class="hidden sm:block"></iconify-icon>
-                        </a>
+                        <a href="https://github.com/badrayman1" target="_blank"
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300"><iconify-icon
+                                icon="mdi:github" width="21"></iconify-icon></a>
+                        <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank"
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300"><iconify-icon
+                                icon="mdi:linkedin" width="21"></iconify-icon></a>
+                        <a href="mailto:baderayman971@gmail.com"
+                            class="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#E30613] hover:border-[#E30613]/30 transition-all duration-300"><iconify-icon
+                                icon="mdi:email" width="21"></iconify-icon></a>
                     </div>
                 </div>
-
                 <div class="fade-up">
                     <form id="contactForm" class="space-y-4 sm:space-y-5">
-                        <div>
-                            <label class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your Name</label>
-                            <input type="text" placeholder="John Doe" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
+                        <div><label
+                                class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your
+                                Name</label><input type="text" placeholder="John Doe" required
+                                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
-                        <div>
-                            <label class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your Email</label>
-                            <input type="email" placeholder="john@example.com" required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
+                        <div><label
+                                class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your
+                                Email</label><input type="email" placeholder="john@example.com" required
+                                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
-                        <div>
-                            <label class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Subject</label>
-                            <input type="text" placeholder="Project Inquiry" class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
+                        <div><label
+                                class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Subject</label><input
+                                type="text" placeholder="Project Inquiry"
+                                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
-                        <div>
-                            <label class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Message</label>
-                            <textarea rows="4" placeholder="Tell me about your project..." required class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors resize-none"></textarea>
+                        <div><label
+                                class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Message</label><textarea
+                                rows="4" placeholder="Tell me about your project..." required
+                                class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors resize-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-[#E30613] hover:bg-[#b91c1c] active:bg-[#7f1d1d] text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-colors duration-300 flex items-center justify-center gap-2">
-                            Send Message
-                            <iconify-icon icon="mdi:send" width="16" class="sm:hidden"></iconify-icon>
-                            <iconify-icon icon="mdi:send" width="18" class="hidden sm:block"></iconify-icon>
+                        <button type="submit"
+                            class="w-full bg-[#E30613] hover:bg-[#b91c1c] active:bg-[#7f1d1d] text-white px-6 sm:px-8 py-3 sm:py-4 text-[10px] sm:text-sm tracking-widest uppercase font-medium transition-colors duration-300 flex items-center justify-center gap-2 rounded-lg">
+                            Send Message <iconify-icon icon="mdi:send" width="17"></iconify-icon>
                         </button>
-                        <div id="formMessage" class="hidden text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg"></div>
+                        <div id="formMessage" class="hidden text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -836,50 +1215,116 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col items-center gap-4 sm:flex-row sm:justify-between sm:gap-6">
                 <div class="flex items-center gap-2 sm:gap-3">
-                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded bg-[#E30613] flex items-center justify-center font-['Oswald'] text-xs sm:text-sm font-600">B</div>
+                    <div
+                        class="w-7 h-7 sm:w-8 sm:h-8 rounded bg-[#E30613] flex items-center justify-center font-['Oswald'] text-xs sm:text-sm font-600">
+                        B</div>
                     <span class="font-['Oswald'] text-xs sm:text-sm tracking-wide uppercase">Badr Ayman</span>
                 </div>
                 <p class="text-gray-600 text-[10px] sm:text-sm">© 2025 Badr Ayman. All rights reserved.</p>
                 <div class="flex gap-3 sm:gap-4">
-                    <a href="https://github.com/badrayman1" target="_blank" class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github" width="18"></iconify-icon></a>
-                    <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank" class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin" width="18"></iconify-icon></a>
-                    <a href="mailto:baderayman971@gmail.com" class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:email" width="18"></iconify-icon></a>
+                    <a href="https://github.com/badrayman1" target="_blank"
+                        class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:github"
+                            width="18"></iconify-icon></a>
+                    <a href="https://www.linkedin.com/in/badr-ayman-294b17288/" target="_blank"
+                        class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:linkedin"
+                            width="18"></iconify-icon></a>
+                    <a href="mailto:baderayman971@gmail.com"
+                        class="text-gray-600 hover:text-[#E30613] transition-colors"><iconify-icon icon="mdi:email"
+                            width="18"></iconify-icon></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <!-- Back to Top -->
-    <button id="backToTop" class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E30613] text-white flex items-center justify-center shadow-lg opacity-0 translate-y-4 transition-all duration-300 z-50 hover:bg-[#b91c1c] active:bg-[#7f1d1d]" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
+    <button id="backToTop"
+        class="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E30613] text-white flex items-center justify-center shadow-lg opacity-0 translate-y-4 transition-all duration-300 z-50 hover:bg-[#b91c1c] active:bg-[#7f1d1d]"
+        onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">
         <iconify-icon icon="mdi:chevron-up" width="22"></iconify-icon>
     </button>
 
     <script>
-        // ===== Custom Cursor (desktop only) =====
+        // ===== CERT DATA - غيّر المسارات لملفات PDF عندك =====
+        const certData = [
+            { title: "ICPC Egyptian Teens QPC", category: "Competitive Programming", pdf: "certs/2026-ICPC Egyptian Teens QPC-Badr Ayman-PLACE.pdf" },
+            { title: "ICPC Egyptian Teens OQPC", category: "Competitive Programming", pdf: "certs/2026-ICPC Egyptian Teens OQPC-Badr Ayman-PLACE.pdf" },
+            { title: "TechTank Participation", category: "Innovation & Technology", pdf: "certs/1745060249394.jfif" },
+            { title: "ICPC Egyptian Teens OQPC", category: "Competitive Programming", pdf: "certs/2025-ICPC Egyptian Teens OQPC-Badr Ayman-PLACE.pdf" },
+            { title: "ICPC Egyptian Teens QPC", category: "Competitive Programming", pdf: "certs/2025-ICPC Egyptian Teens QPC-Badr Ayman-PLACE.pdf" },
+            { title: "Ready For Tomorrow", category: "Career Development", pdf: "certs/Ready For Tomorrow.pdf" }
+        ];
+
+        // ===== PDF MODAL =====
+        let currentCertIndex = 0;
+        let pdfTimeout = null;
+
+        function openCertModal(index) {
+            currentCertIndex = index;
+            const cert = certData[index];
+            const modal = document.getElementById('certModal');
+
+            document.getElementById('modalTitle').textContent = cert.title;
+            document.getElementById('modalCategory').textContent = cert.category;
+            document.getElementById('pdfDownloadBtn').href = cert.pdf;
+            document.getElementById('pdfDownloadBtn').download = cert.title.replace(/\s+/g, '_') + '.pdf';
+
+            document.getElementById('pdfLoading').classList.remove('hidden');
+            document.getElementById('pdfNotFound').classList.add('hidden');
+            document.getElementById('pdfFrame').classList.add('hidden');
+            document.getElementById('pdfFrame').src = cert.pdf;
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+
+            clearTimeout(pdfTimeout);
+            pdfTimeout = setTimeout(() => {
+                const loading = document.getElementById('pdfLoading');
+                if (!loading.classList.contains('hidden')) {
+                    loading.classList.add('hidden');
+                    document.getElementById('pdfNotFound').classList.remove('hidden');
+                    document.getElementById('pdfNotFoundPath').textContent = 'Expected: ' + cert.pdf;
+                }
+            }, 6000);
+        }
+
+        function pdfLoaded() {
+            document.getElementById('pdfLoading').classList.add('hidden');
+            document.getElementById('pdfFrame').classList.remove('hidden');
+            clearTimeout(pdfTimeout);
+        }
+
+        function closeCertModal() {
+            const modal = document.getElementById('certModal');
+            modal.style.opacity = '0';
+            setTimeout(() => {
+                modal.classList.remove('active');
+                modal.style.opacity = '';
+                document.body.style.overflow = '';
+                document.getElementById('pdfFrame').src = '';
+                document.getElementById('pdfFrame').classList.add('hidden');
+                clearTimeout(pdfTimeout);
+            }, 300);
+        }
+
+        // ===== CUSTOM CURSOR =====
         const cursorDot = document.getElementById('cursorDot');
         const cursorRing = document.getElementById('cursorRing');
-        const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+        const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-        if (!isTouchDevice && window.innerWidth > 1024) {
+        if (!isTouch && window.innerWidth > 1024) {
             document.addEventListener('mousemove', (e) => {
                 cursorDot.style.left = e.clientX - 4 + 'px';
                 cursorDot.style.top = e.clientY - 4 + 'px';
                 cursorRing.style.left = e.clientX - 17.5 + 'px';
                 cursorRing.style.top = e.clientY - 17.5 + 'px';
             });
-            document.querySelectorAll('a, button, .project-card').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursorRing.style.width = '50px'; cursorRing.style.height = '50px';
-                    cursorRing.style.borderColor = 'rgba(227, 6, 19, 0.8)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursorRing.style.width = '35px'; cursorRing.style.height = '35px';
-                    cursorRing.style.borderColor = 'rgba(227, 6, 19, 0.5)';
-                });
+            document.querySelectorAll('a,button,.cert-badge,.project-card').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorRing.style.width = '50px'; cursorRing.style.height = '50px'; cursorRing.style.borderColor = 'rgba(227,6,19,0.8)'; });
+                el.addEventListener('mouseleave', () => { cursorRing.style.width = '35px'; cursorRing.style.height = '35px'; cursorRing.style.borderColor = 'rgba(227,6,19,0.5)'; });
             });
         }
 
-        // ===== Mobile Menu =====
+        // ===== MOBILE MENU =====
         let menuOpen = false;
         function toggleMenu() {
             menuOpen = !menuOpen;
@@ -888,116 +1333,106 @@
             document.body.style.overflow = menuOpen ? 'hidden' : '';
         }
 
-        // Close menu on escape
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && menuOpen) toggleMenu();
-        });
-
-        // ===== Scroll Progress =====
+        // ===== SCROLL PROGRESS =====
         window.addEventListener('scroll', () => {
-            const scrollTop = document.documentElement.scrollTop;
-            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            document.getElementById('scrollProgress').style.width = (scrollTop / scrollHeight) * 100 + '%';
+            const s = document.documentElement.scrollTop;
+            const h = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scrollProgress').style.width = (s / h) * 100 + '%';
 
-            const backToTop = document.getElementById('backToTop');
-            if (scrollTop > 300) {
-                backToTop.style.opacity = '1'; backToTop.style.transform = 'translateY(0)';
-            } else {
-                backToTop.style.opacity = '0'; backToTop.style.transform = 'translateY(16px)';
-            }
+            const btn = document.getElementById('backToTop');
+            if (s > 300) { btn.style.opacity = '1'; btn.style.transform = 'translateY(0)'; }
+            else { btn.style.opacity = '0'; btn.style.transform = 'translateY(16px)'; }
+
+            document.getElementById('navbar').style.background = s > 50 ? 'rgba(5,5,5,0.95)' : 'rgba(26,26,26,0.6)';
         });
 
-        // ===== Typewriter =====
-        const typewriterTexts = [
-            'Junior Full-Stack Web Developer',
-            'React.js Developer',
-            'Node.js Developer',
-            'Laravel Developer',
-            'Problem Solver'
-        ];
-        let textIndex = 0, charIndex = 0, isDeleting = false;
-        const typewriterEl = document.getElementById('typewriter');
+        // ===== TYPEWRITER =====
+        const twTexts = ['Junior Full-Stack Web Developer', 'React.js Developer', 'Node.js Developer', 'Laravel Developer', 'Problem Solver'];
+        let twi = 0, twc = 0, twDel = false;
+        const twEl = document.getElementById('typewriter');
 
         function typeWriter() {
-            const currentText = typewriterTexts[textIndex];
-            if (isDeleting) { typewriterEl.textContent = currentText.substring(0, charIndex - 1); charIndex--; }
-            else { typewriterEl.textContent = currentText.substring(0, charIndex + 1); charIndex++; }
-            let timeout = isDeleting ? 30 : 80;
-            if (!isDeleting && charIndex === currentText.length) { timeout = 2000; isDeleting = true; }
-            else if (isDeleting && charIndex === 0) { isDeleting = false; textIndex = (textIndex + 1) % typewriterTexts.length; timeout = 500; }
-            setTimeout(typeWriter, timeout);
+            const txt = twTexts[twi];
+            if (twDel) { twEl.textContent = txt.substring(0, twc - 1); twc--; }
+            else { twEl.textContent = txt.substring(0, twc + 1); twc++; }
+            let t = twDel ? 30 : 80;
+            if (!twDel && twc === txt.length) { t = 2000; twDel = true; }
+            else if (twDel && twc === 0) { twDel = false; twi = (twi + 1) % twTexts.length; t = 500; }
+            setTimeout(typeWriter, t);
         }
         setTimeout(typeWriter, 1500);
 
-        // ===== Counter Animation =====
-        function animateCounter(element, target, duration = 2000) {
+        // ===== COUNTER ANIMATION =====
+        function animateCounter(el, target, dur = 2000) {
             let start = 0;
-            const step = timestamp => {
-                if (!start) start = timestamp;
-                const progress = Math.min((timestamp - start) / duration, 1);
-                element.textContent = Math.floor((1 - Math.pow(1 - progress, 3)) * target);
-                if (progress < 1) requestAnimationFrame(step); else element.textContent = target;
+            const step = ts => {
+                if (!start) start = ts;
+                const p = Math.min((ts - start) / dur, 1);
+                el.textContent = Math.floor((1 - Math.pow(1 - p, 3)) * target);
+                if (p < 1) requestAnimationFrame(step); else el.textContent = target;
             };
             requestAnimationFrame(step);
         }
-        let countersAnimated = false;
+        let counted = false;
 
-        // ===== Scroll Animations =====
+        // ===== SCROLL ANIMATIONS =====
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
-                    entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => bar.classList.add('visible'));
+                    entry.target.querySelectorAll('.skill-bar-fill').forEach(b => b.classList.add('visible'));
                 }
             });
         }, { threshold: 0.05, rootMargin: '0px 0px -30px 0px' });
 
-        document.querySelectorAll('.fade-up, .fade-in, .slide-left, .slide-right').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
         setTimeout(() => {
-            if (!countersAnimated) {
-                countersAnimated = true;
-                animateCounter(document.getElementById('statProjects'), 3);
+            if (!counted) {
+                counted = true;
+                animateCounter(document.getElementById('statProjects'), 7);
                 animateCounter(document.getElementById('statTechnologies'), 12);
                 animateCounter(document.getElementById('statCertifications'), 6);
             }
         }, 2500);
 
-        // ===== Active Nav =====
+        // ===== ACTIVE NAV =====
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
         window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => { if (scrollY >= section.offsetTop - 100) current = section.getAttribute('id'); });
-            navLinks.forEach(link => {
-                link.classList.remove('active', 'text-[#E30613]');
-                link.classList.add('text-gray-400');
-                if (link.getAttribute('href') === '#' + current) {
-                    link.classList.add('active', 'text-[#E30613]'); link.classList.remove('text-gray-400');
-                }
+            let cur = '';
+            sections.forEach(s => { if (scrollY >= s.offsetTop - 100) cur = s.id; });
+            navLinks.forEach(l => {
+                l.classList.remove('active', 'text-[#E30613]'); l.classList.add('text-gray-400');
+                if (l.getAttribute('href') === '#' + cur) { l.classList.add('active', 'text-[#E30613]'); l.classList.remove('text-gray-400'); }
             });
         });
 
-        // ===== Contact Form =====
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // ===== CONTACT FORM =====
+        document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const msgDiv = document.getElementById('formMessage');
-            msgDiv.className = 'text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg bg-[#E30613]/10 text-[#E30613] border border-[#E30613]/20';
-            msgDiv.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
-            msgDiv.classList.remove('hidden');
+            const m = document.getElementById('formMessage');
+            m.className = 'text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg bg-[#E30613]/10 text-[#E30613] border border-[#E30613]/20';
+            m.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+            m.classList.remove('hidden');
             this.reset();
-            setTimeout(() => { msgDiv.classList.add('hidden'); }, 5000);
+            setTimeout(() => m.classList.add('hidden'), 5000);
         });
 
-        // ===== Navbar BG =====
-        window.addEventListener('scroll', () => {
-            document.getElementById('navbar').style.background = window.scrollY > 50 ? 'rgba(5,5,5,0.95)' : 'rgba(26,26,26,0.6)';
+        // ===== KEYBOARD =====
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (document.getElementById('certModal').classList.contains('active')) closeCertModal();
+                if (menuOpen) toggleMenu();
+            }
         });
 
-        // ===== Resize handler =====
-        window.addEventListener('resize', () => {
-            if (window.innerWidth > 1024 && menuOpen) toggleMenu();
+        document.querySelectorAll('.cert-badge').forEach((b, i) => {
+            b.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openCertModal(i); } });
         });
+
+        window.addEventListener('resize', () => { if (window.innerWidth > 1024 && menuOpen) toggleMenu(); });
     </script>
 </body>
+
 </html>
