@@ -562,8 +562,7 @@
                     <p class="text-gray-400 text-sm mb-1">Certificate PDF not found</p>
                     <p class="text-gray-600 text-xs" id="pdfNotFoundPath"></p>
                 </div>
-                <iframe id="pdfFrame" class="w-full hidden" style="height:80vh;min-height:450px;border:none;"
-                    onload="pdfLoaded()"></iframe>
+                <iframe id="pdfFrame" class="w-full hidden" style="height:80vh;min-height:450px;border:none;"></iframe>
             </div>
         </div>
     </div>
@@ -1296,9 +1295,14 @@
             }, 6000);
         }
 
+        const pdfFrame = document.getElementById('pdfFrame');
+        const pdfLoading = document.getElementById('pdfLoading');
+
+        pdfFrame.addEventListener('load', pdfLoaded);
+
         function pdfLoaded() {
-            document.getElementById('pdfLoading').classList.add('hidden');
-            document.getElementById('pdfFrame').classList.remove('hidden');
+            pdfLoading.classList.add('hidden');
+            pdfFrame.classList.remove('hidden');
             clearTimeout(pdfTimeout);
         }
 
