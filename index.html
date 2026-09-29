@@ -1188,22 +1188,22 @@
                     <form id="contactForm" class="space-y-4 sm:space-y-5">
                         <div><label
                                 class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your
-                                Name</label><input type="text" placeholder="John Doe" required
+                                Name</label><input type="text" name="name" placeholder="John Doe" required
                                 class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
                         <div><label
                                 class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Your
-                                Email</label><input type="email" placeholder="john@example.com" required
+                                Email</label><input type="email" name="email" placeholder="john@example.com" required
                                 class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
                         <div><label
                                 class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Subject</label><input
-                                type="text" placeholder="Project Inquiry"
+                                type="text" name="subject" placeholder="Project Inquiry"
                                 class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors">
                         </div>
                         <div><label
                                 class="text-gray-500 text-[10px] sm:text-xs tracking-widest uppercase block mb-1.5 sm:mb-2">Message</label><textarea
-                                rows="4" placeholder="Tell me about your project..." required
+                                name="message" rows="4" placeholder="Tell me about your project..." required
                                 class="w-full bg-white/5 border border-white/10 rounded-lg px-4 sm:px-5 py-3 sm:py-4 text-xs sm:text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-[#E30613]/50 transition-colors resize-none"></textarea>
                         </div>
                         <button type="submit"
@@ -1422,14 +1422,88 @@
         });
 
         // ===== CONTACT FORM =====
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        const recipientEmail = 'baderayman971@gmail.com';
+
+        function fallbackMailto(form) {
+            const formData = new FormData(form);
+            const name = (formData.get('name') || '').toString().trim();
+            const email = (formData.get('email') || '').toString().trim();
+            const subject = (formData.get('subject') || 'Project Inquiry').toString().trim();
+            const message = (formData.get('message') || '').toString().trim();
+
+            if (!name || !email || !message) {
+                return;
+            }
+
+            const body = [
+                'Name: ' + name,
+                'Email: ' + email,
+                '',
+                'Message:',
+                message
+            ].join('\n');
+
+            const mailtoLink = `mailto:${recipientEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
+
             const m = document.getElementById('formMessage');
             m.className = 'text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg bg-[#E30613]/10 text-[#E30613] border border-[#E30613]/20';
-            m.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+            m.textContent = '✓ Your email app is opening. Send the message there to reach me.';
             m.classList.remove('hidden');
-            this.reset();
-            setTimeout(() => m.classList.add('hidden'), 5000);
+        }
+
+        document.getElementById('contactForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const form = this;
+            const formData = new FormData(form);
+            const payload = {
+                name: (formData.get('name') || '').toString().trim(),
+                email: (formData.get('email') || '').toString().trim(),
+                subject: (formData.get('subject') || 'Project Inquiry').toString().trim(),
+                message: (formData.get('message') || '').toString().trim()
+            };
+
+            if (!payload.name || !payload.email || !payload.message) {
+                return;
+            }
+
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalText = submitButton.innerHTML;
+            submitButton.disabled = true;
+            submitButton.innerHTML = 'Sending...';
+
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json().catch(() => ({ ok: false, message: 'Unable to send message.' }));
+
+                const m = document.getElementById('formMessage');
+                m.className = 'text-center text-xs sm:text-sm py-2.5 sm:py-3 rounded-lg bg-[#E30613]/10 text-[#E30613] border border-[#E30613]/20';
+
+                if (response.ok && data.ok) {
+                    m.textContent = '✓ Message sent successfully! I\'ll get back to you soon.';
+                    form.reset();
+                    setTimeout(() => m.classList.add('hidden'), 5000);
+                } else {
+                    m.textContent = data.message || 'Something went wrong. Please try again.';
+                    // fall back to email app if the backend is not configured yet
+                    fallbackMailto(form);
+                    form.reset();
+                }
+
+                m.classList.remove('hidden');
+            } catch (error) {
+                fallbackMailto(form);
+                form.reset();
+            } finally {
+                submitButton.disabled = false;
+                submitButton.innerHTML = originalText;
+            }
         });
 
         // ===== KEYBOARD =====
